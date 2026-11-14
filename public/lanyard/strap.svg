@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="240" viewBox="0 0 40 240">
+  <defs>
+    <linearGradient id="strapGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2D0D32" />
+      <stop offset="15%" stop-color="#3F1345" />
+      <stop offset="50%" stop-color="#551D5D" />
+      <stop offset="85%" stop-color="#3F1345" />
+      <stop offset="100%" stop-color="#260A2A" />
+    </linearGradient>
+    <pattern id="ribbonWeave" width="4" height="4" patternUnits="userSpaceOnUse">
+      <path d="M0 2 L4 2 M2 0 L2 4" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" />
+    </pattern>
+  </defs>
+  <!-- Main Ribbon Strap Body -->
+  <rect x="0" y="0" width="40" height="240" fill="url(#strapGrad)" />
+  <!-- Weave Texture -->
+  <rect x="0" y="0" width="40" height="240" fill="url(#ribbonWeave)" opacity="0.6" />
+  <!-- Left Stitched Edge -->
+  <line x1="4" y1="0" x2="4" y2="240" stroke="#7B3386" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.8" />
+  <!-- Right Stitched Edge -->
+  <line x1="36" y1="0" x2="36" y2="240" stroke="#7B3386" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.8" />
+  <!-- Subtle center highlight line -->
+  <line x1="20" y1="0" x2="20" y2="240" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+</svg>
+
