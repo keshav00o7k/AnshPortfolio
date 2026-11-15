@@ -7,8 +7,8 @@ import { AboutSection } from "@/components/about/AboutSection";
 import { TestimonialsSection } from "@/components/testimonials/TestimonialsSection";
 import { FootageCtaSection } from "@/components/cta/FootageCtaSection";
 import { ContactSection } from "@/components/contact/ContactSection";
+import { getProjects } from "@/lib/projects";
 import {
-  getProjects,
   getChannelVideos,
   getServices,
   getProofMetrics,
@@ -30,8 +30,8 @@ export default async function Home() {
   return (
     <div className="w-full">
       <Hero />
-      <WorkSection projects={projects} siteConfig={siteConfig} />
-      <ReelCoverflowSection />
+      <WorkSection />
+      <ReelCoverflowSection projects={projects} />
       <ChannelSection videos={channelVideos} siteConfig={siteConfig} />
       <ServicesSection services={services} />
       <AboutSection

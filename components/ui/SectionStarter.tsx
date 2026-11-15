@@ -27,7 +27,7 @@ export const SectionStarter: React.FC<SectionStarterProps> = ({
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       aria-hidden="true"
-      className={`w-full overflow-hidden flex justify-center items-center select-none pointer-events-none mb-6 sm:mb-8 md:mb-12 ${className}`}
+      className={`w-full overflow-hidden flex justify-center items-center select-none pointer-events-none ${className ? className : "mb-6 sm:mb-8 md:mb-12"}`}
     >
       <svg
         viewBox="0 0 1200 200"

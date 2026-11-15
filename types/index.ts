@@ -17,16 +17,20 @@ export interface Project {
   clientLabel: string;
   clientName?: string;
   showClientName: boolean;
+  cloudinaryPublicId?: string;
+  localFile?: string;
   videoUrl: string;
+  fullVideoUrl?: string;
   posterUrl?: string;
   youtubeId?: string;
   isPlaceholder: boolean;
+  order?: number;
 }
 
 export interface HeroConfig {
   headline: string;
   tagline: string;
-  showreelUrl: string;
+  showreelUrl?: string;
   posterUrl?: string;
   isPlaceholder: boolean;
 }
@@ -82,7 +86,24 @@ export interface ModalVideoItem {
   title: string;
   format: ProjectFormat;
   videoUrl?: string;
+  fullVideoUrl?: string;
   youtubeId?: string;
+}
+
+export interface AdminVideoItem {
+  publicId: string;
+  title: string;
+  category: ProjectCategory;
+  order: number;
+  isPublished: boolean;
+  assetFolder: string;
+  bytes: number;
+  format: string;
+  duration?: number;
+  createdAt: string;
+  previewUrl: string;
+  fullVideoUrl: string;
+  posterUrl: string;
 }
 
 export type ContactProjectType =

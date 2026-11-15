@@ -155,9 +155,9 @@ export const VideoModal: React.FC<VideoModalProps> = ({
                 allowFullScreen
                 className="w-full h-full border-0"
               />
-            ) : videoItem.videoUrl ? (
+            ) : (videoItem.fullVideoUrl || videoItem.videoUrl) ? (
               <video
-                src={videoItem.videoUrl}
+                src={videoItem.fullVideoUrl || videoItem.videoUrl}
                 autoPlay
                 controls
                 playsInline

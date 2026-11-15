@@ -19,6 +19,17 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
 }) => {
   const defaults = defaultLanyardProps;
 
+  const handleScrollToWork = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window !== "undefined" && window.location.pathname === "/") {
+      e.preventDefault();
+      const el = document.getElementById("work");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", "#work");
+      }
+    }
+  };
+
   // The Hanging ID Badge Card
   const card = (
     <div
@@ -227,6 +238,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-2">
           <Link
             href="/#work"
+            onClick={handleScrollToWork}
             className="inline-flex items-center justify-center px-7 py-3 text-xs uppercase font-bold tracking-widest text-white bg-violet hover:bg-[#551D5C] transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
             style={{ borderRadius: "6px 24px 6px 24px" }}
           >

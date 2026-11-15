@@ -139,6 +139,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         <video
           ref={videoRef}
           src={`${project.videoUrl}#t=0.1`}
+          poster={project.posterUrl}
           muted
           loop
           playsInline

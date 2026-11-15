@@ -74,10 +74,11 @@ A task is done only when:
 - [ ] Lighthouse mobile Performance 90+ for the page touched
 
 ## 8. Backend and security
+- **CRITICAL SECURITY RULE**: Never print, echo, log, or write any secret, token, API key, password hash, or value from `.env.local` or any environment variable in chat, plans, README, terminal output, or code files. Always use generic placeholders only (e.g. `<YOUR_CLOUDINARY_API_KEY>`, `<YOUR_SESSION_SECRET>`).
 - Contact API: validate input server-side (name, email format, message length), trim and cap lengths, return clear errors.
 - Rate-limit the contact endpoint (simple per-IP limit) to stop spam.
-- Secrets only in `.env.local`, never in code, prompts, or commits. Keep `.env.example` updated.
-- Never log full user messages or emails to the console in production.
+- Secrets only in `.env.local`, never in code, prompts, or commits. Keep `.env.example` updated with placeholders only.
+- Never log full user messages, credentials, or emails to the console in production.
 - MongoDB connection reused via a cached global (as in `lib/mongodb.ts`).
 
 ## 9. SEO and meta

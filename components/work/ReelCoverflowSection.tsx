@@ -4,12 +4,14 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { VideoModal } from "@/components/work/VideoModal";
-import { ModalVideoItem } from "@/types";
+import { ModalVideoItem, Project } from "@/types";
 
 interface ReelItem {
   id: string;
   videoUrl: string;
   title: string;
+  fullVideoUrl?: string;
+  posterUrl?: string;
 }
 
 const reels: ReelItem[] = [
@@ -24,8 +26,24 @@ const reels: ReelItem[] = [
   { id: "reel-09", videoUrl: "/videos/reel-09.mp4", title: "Visual Story 09" },
 ];
 
-export const ReelCoverflowSection: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(3); // Start on middle reel
+interface ReelCoverflowSectionProps {
+  projects?: Project[];
+}
+
+export const ReelCoverflowSection: React.FC<ReelCoverflowSectionProps> = ({ projects }) => {
+  const reelList: ReelItem[] =
+    projects && projects.length > 0
+      ? projects.map((p) => ({
+          id: p.id,
+          videoUrl: p.videoUrl,
+          title: p.title,
+          fullVideoUrl: p.fullVideoUrl,
+          posterUrl: p.posterUrl,
+        }))
+      : reels;
+
+  const total = reelList.length;
+  const [activeIndex, setActiveIndex] = useState(() => Math.min(3, Math.max(0, Math.floor(total / 2))));
   const [activeModalItem, setActiveModalItem] = useState<ModalVideoItem | null>(null);
   const [triggerElement, setTriggerElement] = useState<HTMLElement | null>(null);
 
@@ -49,8 +67,6 @@ export const ReelCoverflowSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const lastWheelTime = useRef(0);
-
-  const total = reels.length;
 
   const nextSlide = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % total);
@@ -157,6 +173,7 @@ export const ReelCoverflowSection: React.FC = () => {
         title: item.title,
         format: "9:16",
         videoUrl: item.videoUrl,
+        fullVideoUrl: item.fullVideoUrl,
       });
     }
   };
@@ -171,10 +188,15 @@ export const ReelCoverflowSection: React.FC = () => {
     });
   }, []);
 
+  // If an empty project array is explicitly passed (e.g. 0 published in production), hide cleanly
+  if (projects && projects.length === 0) {
+    return null;
+  }
+
   return (
     <section
       aria-label="Visual Stories Reels Showcase"
-      className="relative w-full pt-12 sm:pt-16 pb-16 sm:pb-24 overflow-hidden select-none px-0"
+      className="relative w-full pt-0 sm:pt-2 pb-16 sm:pb-24 overflow-hidden select-none px-0"
     >
       {/* Background ambient radial glow */}
       <div
@@ -183,14 +205,14 @@ export const ReelCoverflowSection: React.FC = () => {
       />
 
       {/* Header Container with dedicated isolation from the carousel */}
-      <div className="relative max-w-5xl mx-auto px-6 text-center mb-10 sm:mb-14">
+      <div className="relative max-w-5xl mx-auto px-6 text-center mb-4 sm:mb-6">
         {/* Top category badge */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-violet/25 bg-surface/80 text-[10.5px] sm:text-xs font-semibold tracking-[0.22em] uppercase text-violet shadow-sm mb-5"
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-violet/25 bg-surface/80 text-[10.5px] sm:text-xs font-semibold tracking-[0.22em] uppercase text-violet shadow-sm mb-4"
         >
           <span>VIDEO EDITING</span>
           <span className="w-1 h-1 rounded-full bg-violet/40" />
@@ -219,7 +241,7 @@ export const ReelCoverflowSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-7 flex justify-center"
+          className="mt-5 flex justify-center"
         >
           <Link
             href="/contact"
@@ -230,9 +252,6 @@ export const ReelCoverflowSection: React.FC = () => {
           </Link>
         </motion.div>
       </div>
-
-      {/* Vertical Spacer to strictly eliminate any overlap with the button */}
-      <div className="h-6 sm:h-10 lg:h-14" aria-hidden="true" />
 
       {/* 3D Coverflow Viewport */}
       <div
@@ -299,7 +318,7 @@ export const ReelCoverflowSection: React.FC = () => {
           className="relative w-full h-full flex items-center justify-center"
           style={{ transformStyle: "preserve-3d" }}
         >
-          {reels.map((reel, index) => {
+          {reelList.map((reel, index) => {
             // Shortest wrapped circular offset
             let offset = index - activeIndex;
             while (offset > total / 2) offset -= total;
@@ -340,6 +359,7 @@ export const ReelCoverflowSection: React.FC = () => {
             return (
               <motion.div
                 key={reel.id}
+                data-reel-id={reel.id}
                 role="button"
                 tabIndex={0}
                 aria-label={`View ${reel.title}`}
@@ -385,6 +405,7 @@ export const ReelCoverflowSection: React.FC = () => {
                     videoRefs.current[index] = el;
                   }}
                   src={`${reel.videoUrl}#t=0.1`}
+                  poster={reel.posterUrl}
                   muted
                   loop
                   playsInline
@@ -404,7 +425,7 @@ export const ReelCoverflowSection: React.FC = () => {
 
       {/* Pagination dots */}
       <div className="flex items-center justify-center gap-2 mt-10 sm:mt-14">
-        {reels.map((reel, idx) => (
+        {reelList.map((reel, idx) => (
           <button
             key={reel.id}
             onClick={() => setActiveIndex(idx)}

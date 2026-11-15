@@ -17,15 +17,14 @@ export const siteConfig: SiteConfig = {
   email: "anshvaishnav2004@gmail.com",
   driveUrl: "", // Add public portfolio Drive URL when available
   youtubeChannelUrl: "https://youtube.com/@sidequestgaming04",
-  instagramUrl: "https://instagram.com/side.quest.gaming",
+  instagramUrl: "https://www.instagram.com/_.ansh07/",
 };
 
 export const heroConfig: HeroConfig = {
   headline: "Retention-focused video editing for YouTube and social media",
   tagline:
     "Pacing, sound design and clean transitions in Adobe Premiere Pro. 30+ long-form videos for a 1.5M+ subscriber channel and 70+ reels for clients.",
-  showreelUrl: "/videos/reel-01.mp4",
-  isPlaceholder: true,
+  isPlaceholder: false,
 };
 
 export const navLinks = [
@@ -36,8 +35,8 @@ export const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-// Phase A project catalog: 9 reels for Selected Work
-const projects: Project[] = [
+// Phase A project catalog: 9 local reels for dev fallback only
+export const staticProjects: Project[] = [
   {
     id: "reel-01",
     title: "Reel 01",
@@ -139,13 +138,7 @@ const projects: Project[] = [
   },
 ];
 
-export async function getProjects(): Promise<Project[]> {
-  return projects;
-}
 
-export async function getProjectById(id: string): Promise<Project | undefined> {
-  return projects.find((p) => p.id === id);
-}
 
 // Personal YouTube channel edits (Side Quest @sidequestgaming04)
 export const channelVideos: ChannelVideo[] = [
