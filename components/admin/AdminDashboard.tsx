@@ -49,6 +49,23 @@ export const AdminDashboard: React.FC = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState("");
 
+  // Logout state
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const handleLogout = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoggingOut(true);
+    try {
+      await fetch("/api/admin/auth/logout", {
+        method: "POST",
+      });
+      router.push("/admin/login");
+      router.refresh();
+    } catch {
+      window.location.href = "/admin/login";
+    }
+  };
+
   // Auto-dismiss feedback notice after 6 seconds
   useEffect(() => {
     if (feedbackNotice) {
@@ -456,12 +473,13 @@ export const AdminDashboard: React.FC = () => {
           >
             View Live Site ↗
           </Link>
-          <form action="/api/admin/auth/logout" method="POST">
+          <form onSubmit={handleLogout}>
             <button
               type="submit"
-              className="rounded-lg border border-line bg-surface px-4 py-2 text-xs font-semibold text-red-600 transition-colors hover:bg-red-50"
+              disabled={isLoggingOut}
+              className="rounded-lg border border-line bg-surface px-4 py-2 text-xs font-semibold text-red-600 transition-colors hover:bg-red-50 disabled:opacity-50"
             >
-              Log out
+              {isLoggingOut ? "Logging out..." : "Log out"}
             </button>
           </form>
         </div>

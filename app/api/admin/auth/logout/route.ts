@@ -9,7 +9,10 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const response = NextResponse.json({ success: true });
+  const isHtml = request.headers.get("accept")?.includes("text/html");
+  const response = isHtml
+    ? NextResponse.redirect(new URL("/admin/login", request.url), 303)
+    : NextResponse.json({ success: true, redirect: "/admin/login" });
 
   response.cookies.set({
     name: SESSION_COOKIE_NAME,
