@@ -4,11 +4,13 @@ import { PlaceholderBadge } from "@/components/ui/PlaceholderBadge";
 interface PhotoPlaceholderProps {
   photoUrl?: string;
   isPlaceholder?: boolean;
+  className?: string;
 }
 
 export const PhotoPlaceholder: React.FC<PhotoPlaceholderProps> = ({
   photoUrl,
   isPlaceholder = true,
+  className = "",
 }) => {
   const isDev = process.env.NODE_ENV === "development";
   const hasPhoto = Boolean(photoUrl && photoUrl.trim() !== "");
@@ -19,7 +21,9 @@ export const PhotoPlaceholder: React.FC<PhotoPlaceholderProps> = ({
   }
 
   return (
-    <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-[28px] overflow-hidden bg-surface border border-line shadow-lg flex items-center justify-center flex-shrink-0">
+    <div
+      className={`relative w-full max-w-[280px] sm:max-w-[320px] lg:max-w-none aspect-[4/5] rounded-[28px] sm:rounded-[32px] overflow-hidden bg-surface border border-line shadow-xl flex items-center justify-center flex-shrink-0 ${className}`}
+    >
       {hasPhoto ? (
         // eslint-disable-next-line @next/next/no-img-element -- Local/remote portfolio photo
         <img
@@ -27,7 +31,7 @@ export const PhotoPlaceholder: React.FC<PhotoPlaceholderProps> = ({
           alt="Ansh Vaishnav"
           loading="lazy"
           decoding="async"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-[center_28%]"
         />
       ) : (
         <div className="relative w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-b from-surface to-bg text-center">

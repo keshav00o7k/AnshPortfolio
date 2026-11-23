@@ -176,6 +176,22 @@ export const siteConfig: SiteConfig = {
 };
 ```
 
+### 4. Contact Form Email Delivery (Resend)
+
+Contact form submissions are processed server-side via `POST /api/contact` using native `fetch` to Resend.
+
+Required environment variables:
+- `RESEND_API_KEY`: API key from [resend.com](https://resend.com).
+- `CONTACT_EMAIL`: Recipient email inbox where inquiries will land.
+- `CONTACT_FROM`: Sender address (defaults to `onboarding@resend.dev`).
+
+> [!NOTE]
+> While using `onboarding@resend.dev` as the sender, Resend **strictly delivers only to the email address registered to your Resend account**. It is intended for development and testing. For production delivery or custom branding, verify your custom domain in Resend DNS settings (e.g. `Ansh Vaishnav <contact@yourdomain.com>`).
+
+#### Post-Deployment Verification Checklist
+- [ ] Ensure `RESEND_API_KEY`, `CONTACT_EMAIL`, and `CONTACT_FROM` are configured in Vercel Environment Variables.
+- [ ] **Send one real test message after every deploy**: Submit the form on the live site with valid details and verify it arrives in your inbox.
+
 ---
 
 ## 📄 License

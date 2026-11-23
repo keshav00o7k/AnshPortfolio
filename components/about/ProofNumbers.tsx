@@ -7,23 +7,23 @@ interface ProofNumbersProps {
 
 export const ProofNumbers: React.FC<ProofNumbersProps> = ({ metrics }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 max-w-4xl w-full">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 w-full">
       {metrics.map((metric, idx) => (
         <div
           key={idx}
-          className="p-5 sm:p-5.5 rounded-[22px] bg-surface border border-line flex items-center gap-4 transition-all duration-300 hover:border-violet/40 hover:shadow-sm"
+          className="p-5 sm:p-5.5 lg:p-6 rounded-[22px] bg-surface border border-line flex items-center gap-4 transition-all duration-300 hover:border-violet/40 hover:shadow-md"
         >
           {/* Prominent Stat Number */}
-          <span className="font-display text-3xl sm:text-4xl lg:text-[40px] font-bold text-violet tracking-tight shrink-0">
+          <span className="font-display text-3xl sm:text-4xl lg:text-[42px] font-bold text-violet tracking-tight shrink-0">
             {metric.value}
           </span>
 
           {/* Label and Detail column */}
           <div className="flex flex-col text-left min-w-0">
-            <span className="text-xs sm:text-sm font-semibold text-ink leading-snug truncate">
+            <span className="text-xs sm:text-sm font-semibold text-ink leading-snug">
               {metric.label}
             </span>
-            <span className="text-[11px] sm:text-xs text-mute leading-relaxed mt-0.5 line-clamp-2">
+            <span className="text-[11px] sm:text-xs text-mute leading-relaxed mt-0.5">
               {metric.detail}
             </span>
           </div>

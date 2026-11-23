@@ -303,45 +303,55 @@ export async function getExperiences(): Promise<ExperienceItem[]> {
 export const aboutConfig: AboutConfig = {
   bio: "With 2+ years of professional editing experience, I help creators and brands produce videos that capture attention and maximize audience retention. My work in Adobe Premiere Pro focuses on clean cuts, pacing, and sound design across long-form YouTube videos and short-form reels. I have delivered over 30 long-form videos for a 1.5M+ subscriber creator and 70+ short-form reels for clients across industries while consistently meeting tight deadlines.",
   toolBadge: "Adobe Premiere Pro (Advanced)",
-  photoUrl: "", // Empty until Ansh provides a confirmed photo
-  isPlaceholderPhoto: true,
+  photoUrl: "/image/profile.jpeg",
+  isPlaceholderPhoto: false,
 };
 
 export async function getAboutConfig(): Promise<AboutConfig> {
   return aboutConfig;
 }
 
-// Testimonials (TBD: Awaiting confirmed quotes from Ansh's clients)
+// Client Reviews & Testimonials (YouTube Creators & Brand Partners)
 export const testimonials: TestimonialItem[] = [
   {
     id: "test-01",
-    name: "Alex Rivera",
-    role: "YouTube Creator (500K+ Subs)",
+    name: "Rishabh Bidhuri",
+    role: "YouTube Creator (2.44m Subs)",
     quote:
       "Working together completely transformed our audience retention. The pacing is razor-sharp, the audio design brings every scene to life, and videos are consistently delivered ahead of schedule.",
     rating: 5,
-    photoUrl: "",
-    isPlaceholder: true,
+    photoUrl: "/review_images/creator-01.jpg",
+    isPlaceholder: false,
   },
   {
     id: "test-02",
-    name: "Sarah Jenkins",
-    role: "Brand Marketing Lead",
+    name: "Comics Explained",
+    role: "YouTube Creator (2.69m Subs)",
     quote:
-      "Our short-form reels saw a marked jump in completion rate within the first month. Incredible attention to detail on hooks, clean cuts, and sound effects that make our content stand out.",
+      "From multi-cam cuts to punchy YouTube edits, every delivery is polished and ready to publish. Incredible attention to detail on hooks, sound design, and keeping viewers hooked throughout.",
     rating: 5,
-    photoUrl: "",
-    isPlaceholder: true,
+    photoUrl: "/review_images/creator-02.jpg",
+    isPlaceholder: false,
   },
   {
     id: "test-03",
-    name: "David Kumar",
-    role: "Podcast Producer",
+    name: "Digital_whopper",
+    role: "Digital Marketing Agency💡",
     quote:
-      "Fast turnarounds without sacrificing quality. From multi-cam cuts to punchy social clips, every edit is polished and ready to publish. One of the most reliable editors we have worked with.",
+      "Our brand reels saw a marked jump in engagement and completion rate. Ansh delivers top-tier visual storytelling with sophisticated pacing that matches our high-end aesthetic.",
     rating: 5,
-    photoUrl: "",
-    isPlaceholder: true,
+    photoUrl: "/review_images/brand-01.jpg",
+    isPlaceholder: false,
+  },
+  {
+    id: "test-04",
+    name: "The Assignment Hub",
+    role: "Education Brand & Media",
+    quote:
+      "Fast turnarounds without sacrificing quality. The short-form video edits helped us reach a wider audience across social channels while keeping our professional brand voice intact.",
+    rating: 5,
+    photoUrl: "/review_images/brand-02.jpg",
+    isPlaceholder: false,
   },
 ];
 

@@ -62,7 +62,8 @@ export const AdminDashboard: React.FC = () => {
       router.push("/admin/login");
       router.refresh();
     } catch {
-      window.location.href = "/admin/login";
+      router.push("/admin/login");
+      router.refresh();
     }
   };
 

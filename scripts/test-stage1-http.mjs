@@ -36,7 +36,7 @@ async function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function waitForServer(url, timeoutMs = 25000) {
+async function waitForServer(url, timeoutMs = 45000) {
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
     try {
@@ -71,7 +71,7 @@ async function run() {
   console.log("========================================================\n");
 
   console.log(`Starting Next.js server on port ${TEST_PORT}...`);
-  const serverProcess = spawn("cmd.exe", ["/c", "npm", "run", "start", "--", "-p", String(TEST_PORT)], {
+  const serverProcess = spawn("cmd.exe", ["/c", "npx", "next", "dev", "--webpack", "-p", String(TEST_PORT)], {
     cwd: rootDir,
     stdio: ["ignore", "pipe", "pipe"],
   });
@@ -176,28 +176,28 @@ async function run() {
       logTest(6, "GET /admin with expired cookie redirects", ok, `Status ${res.status}, Location: ${location}`);
     }
 
-    // 7. GET /api/admin/session-check without cookie -> 401 Unauthorized
+    // 7. GET /api/admin/list without cookie -> 401 Unauthorized
     {
-      const res = await fetch(`${BASE_URL}/api/admin/session-check`, {
+      const res = await fetch(`${BASE_URL}/api/admin/list`, {
         method: "GET",
       });
       const data = await res.json().catch(() => ({}));
-      const ok = res.status === 401 && data.authenticated === false;
-      logTest(7, "GET /api/admin/session-check without cookie returns 401", ok, `Status ${res.status}`);
+      const ok = res.status === 401 && data.error?.includes("Unauthorized");
+      logTest(7, "GET /api/admin/list without cookie returns 401", ok, `Status ${res.status}`);
     }
 
-    // 8. GET /api/admin/session-check with valid signed cookie -> 200 OK ({ authenticated: true, role: "admin" })
+    // 8. GET /api/admin/list with valid signed cookie -> 200 OK
     {
-      const res = await fetch(`${BASE_URL}/api/admin/session-check`, {
+      const res = await fetch(`${BASE_URL}/api/admin/list`, {
         method: "GET",
         headers: {
           Cookie: validCookie,
         },
       });
       const data = await res.json().catch(() => ({}));
-      const ok = res.status === 200 && data.authenticated === true && data.role === "admin";
-      logTest(8, "GET /api/admin/session-check with valid cookie reaches /api/admin", ok, 
-        `Status ${res.status}, Authenticated: ${data.authenticated}, Role: "${data.role}"`);
+      const ok = res.status === 200 && Array.isArray(data.assets);
+      logTest(8, "GET /api/admin/list with valid cookie reaches /api/admin", ok, 
+        `Status ${res.status}, Assets returned: ${Array.isArray(data.assets)}`);
     }
 
     // 9. GET /admin with valid signed cookie -> 200 OK (passes admin gate)

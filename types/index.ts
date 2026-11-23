@@ -119,9 +119,10 @@ export type ContactProjectType =
 export interface ContactFormData {
   name: string;
   email: string;
+  phone?: string;
   projectType: ContactProjectType | string;
-  budget?: string;
   message: string;
+  contact_lead_ref?: string;
 }
 
 export interface LeadSubmission {

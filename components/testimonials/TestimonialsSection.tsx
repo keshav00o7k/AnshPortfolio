@@ -101,7 +101,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
               className="flex flex-col md:flex-row items-stretch w-full h-full"
             >
               {/* Left Column: Headshot / Avatar Container */}
-              <div className="relative w-full md:w-[320px] lg:w-[360px] aspect-[4/3] md:aspect-auto flex-shrink-0 bg-bg overflow-hidden border-b md:border-b-0 md:border-r border-line">
+              <div className="relative w-full md:w-[320px] lg:w-[360px] aspect-[4/3] md:aspect-auto flex-shrink-0 bg-bg overflow-hidden border-b md:border-b-0 md:border-r border-line flex items-center justify-center">
                 {current.photoUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -109,7 +109,11 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                     alt={current.name}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full ${
+                      current.photoUrl.includes("brand-02")
+                        ? "object-contain p-8 sm:p-10 bg-white"
+                        : "object-cover object-center"
+                    }`}
                   />
                 ) : (
                   <div className="w-full h-full min-h-[220px] md:min-h-[320px] flex flex-col items-center justify-center p-6 bg-gradient-to-b from-surface via-bg to-surface text-center">

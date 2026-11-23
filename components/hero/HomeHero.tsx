@@ -12,7 +12,7 @@ interface HomeHeroProps {
 }
 
 export const HomeHero: React.FC<HomeHeroProps> = ({
-  portrait = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&auto=format&fit=crop&q=85",
+  portrait = "/image/profile.jpeg",
   strap = "/lanyard/strap.svg",
   clasp = "/lanyard/clasp.svg",
   style,
@@ -87,6 +87,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
             width: "100%",
             height: "100%",
             objectFit: "cover",
+            objectPosition: "center 30%",
             display: "block",
             pointerEvents: "none",
           }}
