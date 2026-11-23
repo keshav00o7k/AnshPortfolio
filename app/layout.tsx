@@ -12,6 +12,8 @@ import { Navbar } from "@/components/nav/Navbar";
 import { Footer } from "@/components/footer/Footer";
 import { ScrollManager } from "@/components/nav/ScrollManager";
 import { siteConfig } from "@/lib/data";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -117,6 +119,8 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1 pt-24">{children}</main>
         <Footer />
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
